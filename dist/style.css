@@ -38,6 +38,9 @@ a {
 
 main {
 	padding: 1rem 1rem 0 1rem;
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
 }
 
 .task {
@@ -56,4 +59,15 @@ main {
 
 .due-date {
 	flex-grow: 1;
+}
+
+.task-done div span,
+.task-done .description {
+	text-decoration: line-through;
+}
+
+.task-done {
+	background-color: #94a3b8;
+	box-shadow: none;
+	box-shadow: inset 0px 0px 28px 11px rgba(0, 0, 0, 0.15);
 }

@@ -36,6 +36,11 @@ a {
 	text-decoration: none;
 }
 
+.add-project {
+	width: 100%;
+	text-align: right;
+}
+
 main {
 	padding: 1rem 1rem 0 1rem;
 	display: flex;
@@ -61,6 +66,10 @@ main {
 	flex-grow: 1;
 }
 
+.add-task {
+	align-self: end;
+}
+
 .task-done div span,
 .task-done .description {
 	text-decoration: line-through;
@@ -70,4 +79,54 @@ main {
 	background-color: #94a3b8;
 	box-shadow: none;
 	box-shadow: inset 0px 0px 28px 11px rgba(0, 0, 0, 0.15);
+}
+
+.add-task-form {
+	width: 100dvw;
+	height: 100dvh;
+	background-color: rgba(225, 225, 225, 0.8);
+	position: absolute;
+	left: 0;
+	top: 0;
+	display: grid;
+	align-content: center;
+	justify-content: center;
+
+	display: none;
+	font-size: 20px;
+}
+
+fieldset {
+	border: none;
+}
+
+form {
+	border: 1px solid gray;
+	border-radius: 1rem;
+	padding: 1rem;
+	background-color: #e0f2fe;
+	box-shadow: 16px 15px 25px -16px rgba(0, 0, 0, 0.5);
+}
+
+label {
+	display: block;
+	padding-top: 1rem;
+	padding-bottom: 0.5rem;
+}
+
+button {
+	display: block;
+	margin-top: 1rem;
+	width: 100%;
+	padding: 0.6rem;
+	border-radius: 0.5rem;
+	border: none;
+	background-color: #fff;
+}
+
+aside ul li input {
+	border-radius: 0.5rem;
+	border: 1px solid gray;
+	padding: 0.3rem;
+	display: none;
 }

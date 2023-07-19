@@ -88,11 +88,10 @@ main {
 	position: absolute;
 	left: 0;
 	top: 0;
-	display: grid;
+	display: none;
 	align-content: center;
 	justify-content: center;
 
-	display: none;
 	font-size: 20px;
 }
 

@@ -6,7 +6,7 @@
 //todo function to change the due time
 //todo save all this task related stuff in local storage
 
-const task = [
+export const task = [
 	{
 		title: 'some title',
 		description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',

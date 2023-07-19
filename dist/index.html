@@ -23,7 +23,7 @@
 				<li class="next-week"><a href="#">Next 7 Days</a></li>
 			</ul>
 			<p class="fas fa-tags fa-xl"><span> Project</span></p>
-			<ul>
+			<ul class="project-list">
 				<li>Programming</li>
 				<li><input type="text" /></li>
 				<li class="add-project fas fa-plus"></li>
@@ -63,20 +63,20 @@
 			</div>
 		</main>
 		<section class="add-task-form">
-			<form action="">
+			<form action="" id="add-task-form">
 				<fieldset>
 					<legend>
 						<label for="">Title</label>
-						<input type="text" id="task-title" />
+						<input type="text" id="task-title" required />
 						<label for="">description</label>
 						<input type="text" id="task-description" />
 						<label for="">Project</label>
 						<input type="text" id="task-project" />
-						<label for="">Choose a Date</label>
-						<input type="date" />
 						<label for="">Choose a Time</label>
-						<input type="Time" />
-						<button class="add-task-btn">Add Task</button>
+						<input type="Time" id="task-time" />
+						<label for="">Choose a Date</label>
+						<input type="date" id="task-date" />
+						<button type="submit" class="add-task-btn">Add Task</button>
 					</legend>
 				</fieldset>
 			</form>

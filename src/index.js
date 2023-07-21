@@ -1,9 +1,10 @@
 import { addTask } from './task';
-import { displayTaskFrom, displayProjectForm } from './DOM';
+import { displayTaskFrom, displayProjectForm, makeTaskCard } from './DOM';
 
 displayTaskFrom();
-addTask();
 displayProjectForm();
+makeTaskCard();
+addTask();
 // const { DateTime } = require('luxon');
 // const now = DateTime.now();
 // console.log(now.toLocaleString(DateTime.TIME_24_SIMPLE));

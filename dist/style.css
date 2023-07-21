@@ -48,6 +48,12 @@ main {
 	gap: 1rem;
 }
 
+.tasks {
+	display: flex;
+	flex-direction: column;
+	gap: 1rem;
+}
+
 .task {
 	/* border: solid black 0.2rem; */
 	padding: 1rem;

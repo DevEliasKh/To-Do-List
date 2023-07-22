@@ -1,13 +1,11 @@
 ////  store all task in array ane each task as object
-//todo function to add task
-//todo function to edit task
+//// function to add task
 //todo function to delete task
-//todo function to change the project
-//todo function to change the due time
 //// save all this task related stuff in local storage
 
 import { makeTaskCard } from './DOM';
-export const task = [
+
+const task = [
 	{
 		title: 'some title',
 		description: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
@@ -17,12 +15,7 @@ export const task = [
 	},
 ];
 
-export function addTask() {
-	const title = document.querySelector('#task-title');
-	const description = document.querySelector('#task-description');
-	const project = document.querySelector('#task-project');
-}
-
+let taskToAddToStorage = {};
 export function getTaskValue() {
 	const form = document.querySelector('#add-task-form');
 	const taskFrom = document.querySelector('.add-task-form');
@@ -34,14 +27,25 @@ export function getTaskValue() {
 		newTask.project = document.querySelector('#task-project').value;
 		newTask.dueTime = document.querySelector('#task-time').value;
 		newTask.dueDate = document.querySelector('#task-date').value;
-		task.push(newTask);
-		taskFrom.style.display = 'none';
+		taskToAddToStorage = newTask;
+		saveTaskInLocalStorage();
 		makeTaskCard();
-		saveInStorage();
+		taskFrom.style.display = 'none';
 	});
 }
 
-function saveInStorage() {
-	let taskInStorage = JSON.stringify(task);
-	localStorage.setItem('task', taskInStorage);
+export function makeTaskInLocalStorage() {
+	if (!localStorage.getItem('task')) {
+		let taskInStorage = JSON.stringify(task);
+		localStorage.setItem('task', taskInStorage);
+	}
+}
+
+function saveTaskInLocalStorage() {
+	const newTask = taskToAddToStorage;
+	let oldTaskInStorage = localStorage.getItem('task');
+	let task = JSON.parse(oldTaskInStorage);
+	task.push(newTask);
+	let newTaskInStorage = JSON.stringify(task);
+	localStorage.setItem('task', newTaskInStorage);
 }

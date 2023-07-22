@@ -1,7 +1,8 @@
-//todo use task array to display task card
-//todo see task based on project or time
+//// use task array to display task card
+//todo use project array to make project list
+//todo make clickable project to sort task by project
 
-import { project } from './project';
+import { getProjectValue } from './project';
 import { getTaskValue } from './task';
 
 export function displayTaskFrom() {
@@ -24,16 +25,7 @@ export function displayProjectForm() {
 		) {
 			projectInput.style.display = 'block';
 		} else {
-			const projectName = projectInput.value;
-			projectInput.style.display = 'none';
-			projectInput.value = '';
-			if (projectName) {
-				project.push(projectName);
-				const parent = document.querySelector('.project-list');
-				const newProject = document.createElement('li');
-				newProject.innerText = projectName;
-				parent.prepend(newProject);
-			}
+			getProjectValue();
 		}
 	});
 }

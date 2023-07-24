@@ -1,6 +1,8 @@
 //// function to make project
 //// store all project in an array
 
+import { makeProjectList } from './DOM';
+
 export const project = ['programming'];
 let projectToAddToStorage = '';
 
@@ -12,18 +14,19 @@ export function makeProjectInLocalStorage() {
 }
 
 export function getProjectValue() {
-	const projectInput = document.querySelector('.project-list li input');
+	const projectInput = document.querySelector('.default-project li input');
 	const projectName = projectInput.value;
 	projectInput.style.display = 'none';
 	projectInput.value = '';
 	if (projectName) {
-		project.push(projectName);
-		const parent = document.querySelector('.project-list');
-		const newProject = document.createElement('li');
-		newProject.innerText = projectName;
-		parent.prepend(newProject);
+		// project.push(projectName);
+		// const parent = document.querySelector('.project-list');
+		// const newProject = document.createElement('li');
+		// newProject.innerText = projectName;
+		// parent.prepend(newProject);
 		projectToAddToStorage = projectName;
 		saveProjectInLocalStorage();
+		makeProjectList();
 	}
 	console.log(projectToAddToStorage);
 }

@@ -1,5 +1,5 @@
 //// use task array to display task card
-//todo use project array to make project list
+//// use project array to make project list
 //todo make clickable project to sort task by project
 
 import { getProjectValue } from './project';
@@ -17,7 +17,7 @@ export function displayTaskFrom() {
 
 export function displayProjectForm() {
 	const addProjectBtn = document.querySelector('.add-project');
-	const projectInput = document.querySelector('.project-list li input');
+	const projectInput = document.querySelector('.default-project li input');
 	addProjectBtn.addEventListener('click', () => {
 		if (
 			projectInput.style.display == '' ||
@@ -52,4 +52,16 @@ export function makeTaskCard() {
 									</p>`;
 		parent.prepend(newTask);
 	}
+}
+
+export function makeProjectList() {
+	let projectInStorage = localStorage.getItem('project');
+	let project = JSON.parse(projectInStorage);
+	const parent = document.querySelector('.created-project');
+	parent.innerHTML = '';
+	project.forEach((item) => {
+		const newProject = document.createElement('li');
+		newProject.innerHTML = `<li><a href="">${item}</a></li>`;
+		parent.prepend(newProject);
+	});
 }

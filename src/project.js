@@ -19,11 +19,6 @@ export function getProjectValue() {
 	projectInput.style.display = 'none';
 	projectInput.value = '';
 	if (projectName) {
-		// project.push(projectName);
-		// const parent = document.querySelector('.project-list');
-		// const newProject = document.createElement('li');
-		// newProject.innerText = projectName;
-		// parent.prepend(newProject);
 		projectToAddToStorage = projectName;
 		saveProjectInLocalStorage();
 		makeProjectList();
@@ -38,4 +33,23 @@ function saveProjectInLocalStorage() {
 	project.push(newProject);
 	let newProjectInStorage = JSON.stringify(project);
 	localStorage.setItem('project', newProjectInStorage);
+}
+
+export function sortByProject() {
+	const projects = document.querySelectorAll('.created-project li');
+	projects.forEach((project) => {
+		project.addEventListener('click', showProjectTask(project));
+	});
+}
+
+function showProjectTask(project) {
+	let taskInStorage = localStorage.getItem('task');
+	let tasks = JSON.parse(taskInStorage);
+	tasks.forEach((task) => {
+		if (task.project == project) {
+			console.log(task);
+		} else {
+			console.log('ops');
+		}
+	});
 }

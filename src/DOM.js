@@ -61,7 +61,7 @@ export function makeProjectList() {
 	parent.innerHTML = '';
 	project.forEach((item) => {
 		const newProject = document.createElement('li');
-		newProject.innerHTML = `<li><a href="">${item}</a></li>`;
+		newProject.innerHTML = `${item}`;
 		parent.prepend(newProject);
 	});
 }

@@ -3,7 +3,7 @@
 
 import { makeProjectList } from './DOM';
 
-export const project = ['programming'];
+export const project = ['programming', 'Workout'];
 let projectToAddToStorage = '';
 
 export function makeProjectInLocalStorage() {
@@ -38,7 +38,7 @@ function saveProjectInLocalStorage() {
 export function sortByProject() {
 	const projects = document.querySelectorAll('.created-project li');
 	projects.forEach((project) => {
-		project.addEventListener('click', showProjectTask(project));
+		project.addEventListener('click', console.log(project.innerText));
 	});
 }
 

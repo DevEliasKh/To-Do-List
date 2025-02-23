@@ -2,24 +2,43 @@ import "./App.css";
 
 import DeleteIcon from "./assets/DeleteIcon.svg?react";
 import { useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 type Tasks = Array<Task | null | undefined>;
 interface Task {
-   value: string;
-   completed: boolean;
+   id?: string;
+   value?: string;
+   completed?: boolean;
 }
 
 function App() {
    const [tasks, setTasks] = useState<Tasks>([]);
    const [task, setTask] = useState<Task | null>();
-
+   const [inputValue, setInputValue] = useState("");
    const addTasks = () => setTasks([...tasks, task]);
    const addTask = (value: React.ChangeEvent<HTMLInputElement>) => {
-      setTask({ value: value.target.value, completed: false });
+      const uniqueId = uuidv4();
+      setInputValue(value.target.value);
+      setTask({ value: inputValue, completed: false, id: uniqueId });
    };
-   const emptyTask = () => setTask(null);
+   const emptyTask = () => setInputValue("");
 
-   const removeTask = () => {};
+   const removeTask = (id: string | undefined) => {
+      const newTasks = tasks.filter((task) => {
+         return task?.id != id;
+      });
+      setTasks(newTasks);
+   };
+
+   const toggleTaskCompletion = (id: string | undefined) => {
+      const newTasks = tasks.map((task) => {
+         if (task && task.id == id) {
+            task.completed = !task?.completed;
+            return task;
+         }
+      });
+      setTasks(newTasks);
+   };
 
    return (
       <>
@@ -31,9 +50,9 @@ function App() {
             <form className="flex gap-4">
                <input
                   type="text"
-                  // value={task}
                   onChange={addTask}
                   className="border-2 px-1 py-2 rounded-lg"
+                  value={inputValue}
                />
                <button
                   type="submit"
@@ -51,13 +70,14 @@ function App() {
                <div className="flex flex-col">
                   {tasks.map((task) => {
                      return (
-                        <div key={task?.value} className="flex gap-2">
+                        <div key={task?.id} className="flex gap-2">
                            <input
                               type="checkbox"
                               id={task?.value}
                               name={task?.value}
                               defaultChecked={task?.completed}
                               defaultValue={task?.value}
+                              onChange={() => toggleTaskCompletion(task?.id)}
                            />
                            <label
                               htmlFor={task?.value}
@@ -67,7 +87,7 @@ function App() {
                            </label>
                            <DeleteIcon
                               className="w-6 h-6"
-                              onClick={removeTask}
+                              onClick={() => removeTask(task?.id)}
                            />
                         </div>
                      );

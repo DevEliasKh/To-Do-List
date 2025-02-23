@@ -1,5 +1,6 @@
 import "./App.css";
 
+import DeleteIcon from "./assets/DeleteIcon.svg?react";
 import { useState } from "react";
 
 type Tasks = Array<Task | null | undefined>;
@@ -17,6 +18,8 @@ function App() {
       setTask({ value: value.target.value, completed: false });
    };
    const emptyTask = () => setTask(null);
+
+   const removeTask = () => {};
 
    return (
       <>
@@ -62,6 +65,10 @@ function App() {
                            >
                               {task?.value}
                            </label>
+                           <DeleteIcon
+                              className="w-6 h-6"
+                              onClick={removeTask}
+                           />
                         </div>
                      );
                   })}

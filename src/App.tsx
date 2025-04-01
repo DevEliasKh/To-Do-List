@@ -2,43 +2,32 @@ import "./App.css";
 
 import DeleteIcon from "./assets/DeleteIcon.svg?react";
 import { useState } from "react";
+import { useTasksStore } from "./Stores";
 import { v4 as uuidv4 } from "uuid";
 
-type Tasks = Array<Task | null | undefined>;
 interface Task {
-   id?: string;
-   value?: string;
-   completed?: boolean;
+   id: string;
+   value: string;
+   completed: boolean;
 }
 
 function App() {
-   const [tasks, setTasks] = useState<Tasks>([]);
+   const tasks = useTasksStore((state) => state.tasks);
    const [task, setTask] = useState<Task | null>();
    const [inputValue, setInputValue] = useState("");
-   const addTasks = () => setTasks([...tasks, task]);
+   const addTasks = useTasksStore((state) => state.addTasks);
    const addTask = (value: React.ChangeEvent<HTMLInputElement>) => {
       const uniqueId = uuidv4();
       setInputValue(value.target.value);
-      setTask({ value: inputValue, completed: false, id: uniqueId });
+      setTask({ value: value.target.value, completed: false, id: uniqueId });
    };
    const emptyTask = () => setInputValue("");
 
-   const removeTask = (id: string | undefined) => {
-      const newTasks = tasks.filter((task) => {
-         return task?.id != id;
-      });
-      setTasks(newTasks);
-   };
+   const removeTask = useTasksStore((state) => state.removeTask);
 
-   const toggleTaskCompletion = (id: string | undefined) => {
-      const newTasks = tasks.map((task) => {
-         if (task && task.id == id) {
-            task.completed = !task?.completed;
-            return task;
-         }
-      });
-      setTasks(newTasks);
-   };
+   const toggleTaskCompletion = useTasksStore(
+      (state) => state.toggleTaskCompletion
+   );
 
    return (
       <>
@@ -58,8 +47,10 @@ function App() {
                   type="submit"
                   onClick={(event: React.MouseEvent<HTMLButtonElement>) => {
                      event.preventDefault();
-                     addTasks();
-                     emptyTask();
+                     if (task) {
+                        addTasks(task);
+                        emptyTask();
+                     }
                   }}
                >
                   Add Task
@@ -67,27 +58,32 @@ function App() {
             </form>
             <div>
                <h2 className="text-3xl pb-4">Tasks</h2>
-               <div className="flex flex-col">
+               <div className="flex flex-col gap-3">
                   {tasks.map((task) => {
                      return (
-                        <div key={task?.id} className="flex gap-2">
+                        <div
+                           key={task?.id}
+                           className="flex justify-between gap-2 bg-gray-500 px-2 py-1 rounded"
+                        >
                            <input
                               type="checkbox"
-                              id={task?.value}
-                              name={task?.value}
-                              defaultChecked={task?.completed}
-                              defaultValue={task?.value}
-                              onChange={() => toggleTaskCompletion(task?.id)}
+                              id={task!.value}
+                              name={task!.value}
+                              defaultChecked={task!.completed}
+                              defaultValue={task!.value}
+                              onChange={() =>
+                                 toggleTaskCompletion(task!.id as string)
+                              }
                            />
                            <label
-                              htmlFor={task?.value}
-                              className="strikethrough"
+                              htmlFor={task!.value}
+                              className="strikethrough flex-grow text-left"
                            >
-                              {task?.value}
+                              {task!.value}
                            </label>
                            <DeleteIcon
                               className="w-6 h-6"
-                              onClick={() => removeTask(task?.id)}
+                              onClick={() => removeTask(task!.id as string)}
                            />
                         </div>
                      );

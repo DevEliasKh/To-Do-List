@@ -1,21 +1,7 @@
 import { createJSONStorage, persist } from "zustand/middleware";
 
+import { TasksStore } from "../Types";
 import { create } from "zustand";
-
-type Tasks = Array<Task | undefined>;
-
-interface Task {
-   id?: string;
-   value?: string;
-   completed?: boolean;
-}
-
-type TasksStore = {
-   tasks: Tasks;
-   addTasks: (task: Task) => void;
-   removeTask: (id: string) => void;
-   toggleTaskCompletion: (id: string) => void;
-};
 
 export const useTasksStore = create<TasksStore>()(
    persist(

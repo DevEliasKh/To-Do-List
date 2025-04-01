@@ -1,15 +1,10 @@
 import "./App.css";
 
 import DeleteIcon from "./assets/DeleteIcon.svg?react";
+import { Task } from "./Types";
 import { useState } from "react";
 import { useTasksStore } from "./Stores";
 import { v4 as uuidv4 } from "uuid";
-
-interface Task {
-   id: string;
-   value: string;
-   completed: boolean;
-}
 
 function App() {
    const tasks = useTasksStore((state) => state.tasks);
